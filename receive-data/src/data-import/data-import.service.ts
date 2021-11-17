@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import {plainToClass} from 'class-transformer';
 import * as moment from 'moment';
-import { RabbitMqService } from 'src/rabbit-mq/rabbit-mq.service';
+import { RabbitMqService } from '../rabbit-mq/rabbit-mq.service';
 import {utils, read} from 'xlsx';
 import { DataImportDto } from './dto/data-import.dto';
 import {validate} from 'class-validator';

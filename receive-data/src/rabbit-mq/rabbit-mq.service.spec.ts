@@ -5,8 +5,8 @@ import { ConfigService } from '../config/config.service';
 
 describe('RabbitMqService', () => {
   let service: RabbitMqService;
-  let configService : ConfigService;
   beforeEach(async () => {
+    const configService = new ConfigService();
     const module: TestingModule = await Test.createTestingModule({
       imports:[ClientsModule.register([
         {

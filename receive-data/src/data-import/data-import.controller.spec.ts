@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RabbitMqModule } from 'src/rabbit-mq/rabbit-mq.module';
+import { RabbitMqModule } from '../rabbit-mq/rabbit-mq.module';
 import { DataImportController } from './data-import.controller';
 import { DataImportService } from './data-import.service';
 

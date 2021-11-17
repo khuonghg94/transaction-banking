@@ -28,7 +28,7 @@ describe('DataImportService', () => {
       numberRecords: 2,
       validRecords: 2
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case1.xlsx');
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case1.xlsx');
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result).toEqual(returnData);
   });
@@ -38,7 +38,7 @@ describe('DataImportService', () => {
       numberRecords: 3,
       validRecords: 2
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case2.xlsx');
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case2.xlsx');
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result.validRecords).toEqual(returnData.validRecords);
     expect(resultFinal.result.numberRecords - resultFinal.result.validRecords).toBeGreaterThan(0);
@@ -49,19 +49,19 @@ describe('DataImportService', () => {
       numberRecords: 3,
       validRecords: 0
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case3.xlsx')
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case3.xlsx')
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result.validRecords).toEqual(returnData.validRecords);
     expect(resultFinal.result.numberRecords).toEqual(returnData.numberRecords);
   });
 
   it('Read excel file: empty data', async () => {
-      const buffer = fs.readFileSync(__dirname+'/../../files/case4.xlsx');
+      const buffer = fs.readFileSync(__dirname+'/../../testcases/case4.xlsx');
       expect(async () => await service.uploadData(buffer)).rejects.toThrowError(HttpException);
   });
 
   it('Read excel file: no header || no data', async () => {
-      const buffer = fs.readFileSync(__dirname+'/../../files/case5.xlsx');
+      const buffer = fs.readFileSync(__dirname+'/../../testcases/case5.xlsx');
       expect(async () => await service.uploadData(buffer)).rejects.toThrowError(HttpException);
   });
 
@@ -71,7 +71,7 @@ describe('DataImportService', () => {
       numberRecords: 2,
       validRecords: 2
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case1.csv');
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case1.csv');
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result).toEqual(returnData);
   });
@@ -81,7 +81,7 @@ describe('DataImportService', () => {
       numberRecords: 3,
       validRecords: 2
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case2.csv');
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case2.csv');
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result.validRecords).toEqual(returnData.validRecords);
     expect(resultFinal.result.numberRecords - resultFinal.result.validRecords).toBeGreaterThan(0);
@@ -92,19 +92,19 @@ describe('DataImportService', () => {
       numberRecords: 3,
       validRecords: 0
     };
-    const buffer = fs.readFileSync(__dirname+'/../../files/case3.csv')
+    const buffer = fs.readFileSync(__dirname+'/../../testcases/case3.csv')
     const resultFinal = await service.uploadData(buffer);
     expect(resultFinal.result.validRecords).toEqual(returnData.validRecords);
     expect(resultFinal.result.numberRecords).toEqual(returnData.numberRecords);
   });
 
   it('Read excel file: empty data', async () => {
-      const buffer = fs.readFileSync(__dirname+'/../../files/case4.csv');
+      const buffer = fs.readFileSync(__dirname+'/../../testcases/case4.csv');
       expect(async () => await service.uploadData(buffer)).rejects.toThrowError(HttpException);
   });
 
   it('Read csv file: no header || no data', async () => {
-      const buffer = fs.readFileSync(__dirname+'/../../files/case5.csv');
+      const buffer = fs.readFileSync(__dirname+'/../../testcases/case5.csv');
       expect(async () => service.uploadData(buffer)).rejects.toThrowError(HttpException);
   });
 });
