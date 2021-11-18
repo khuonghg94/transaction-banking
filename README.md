@@ -78,6 +78,9 @@ Chú thích:
 
 ```{{path_of_file}}```: Đường dẫn tuyệt đối đến file cần import (File cần import phải là csv hoặc excel)
 
+Lưu ý: Các lệnh curl được run trên Command Prompt
+
+
 ## **5. Hướng dẫn test**
 
 Tại thư mục ```receive-data```: Run ```npm test```
