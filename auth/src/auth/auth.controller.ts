@@ -15,6 +15,16 @@ export class AuthController {
         return this.authService.register(registerUser);
     }
 
+    @Post('update')
+    async update(@Body() updUser: RegisterDto) {
+        return this.authService.update(updUser);
+    }
+
+    @Post('delete')
+    async delete(@Body() delUser: RegisterDto) {
+        return this.authService.delete(delUser);
+    }
+
     @Post('token')
     async getToken(@Body() tokenDto: GenerateTokenDto) {
         return this.authService.getToken(tokenDto);

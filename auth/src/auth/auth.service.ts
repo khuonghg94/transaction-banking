@@ -1,9 +1,10 @@
-import { BadRequestException, ForbiddenException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import RegisterDto from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import GenerateTokenDto from './dto/generate-token.dto';
 import TokenDto from './dto/token.dto';
+import UserDto from '../user/dto/user.dto';
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'BANK-RECONCILIATION';
 const numberTimeExpired = 900000;
@@ -15,8 +16,8 @@ export class AuthService {
     ) {}
     public async register(dataRegister: RegisterDto) {
         const hashedPassword = await bcrypt.hash(dataRegister.password, 10);
-        try {
-            if(this.userService.isUserExisted(dataRegister.email)){
+        try{
+            if (await this.userService.isUserExisted(dataRegister.email) === false){
                 const createdUser = await this.userService.create({
                     ...dataRegister,
                     password: hashedPassword
@@ -25,11 +26,42 @@ export class AuthService {
                 return createdUser;
             }
             else{
-                return new BadRequestException('User with that email already exists');
+                return { message: 'User with that email already exists' , statusCode: HttpStatus.BAD_REQUEST}
             }
         } 
         catch{
-            throw new InternalServerErrorException('Register user failed');
+            return { message: 'Register user failed' , statusCode: HttpStatus.INTERNAL_SERVER_ERROR}
+        }
+    }
+    public async update(dataUpd: RegisterDto) {
+        const hashedPassword = await bcrypt.hash(dataUpd.password, 10);
+        try{
+            if (await this.userService.isUserExisted(dataUpd.email) === true){
+                const userDto = new UserDto();
+                userDto.email = dataUpd.email;
+                userDto.username = dataUpd.username;
+                userDto.password = hashedPassword;
+                return await this.userService.update(userDto);
+            }
+            else{
+                return { message: 'User is not existed' , statusCode: HttpStatus.BAD_REQUEST}
+            }
+        }
+        catch{
+            return { message: 'Update user failed' , statusCode: HttpStatus.INTERNAL_SERVER_ERROR}
+        }
+    }
+    public async delete(delUser: RegisterDto) {
+        try{
+            if (await this.userService.isUserExisted(delUser.email) === true){
+                return this.userService.delete(delUser.email);
+            }
+            else{
+                return { message: 'User is not existed' , statusCode: HttpStatus.BAD_REQUEST}
+            }
+        }
+        catch{
+            return { message: 'Delete user failed' , statusCode: HttpStatus.INTERNAL_SERVER_ERROR}
         }
     }
     public async getToken(dataToken: GenerateTokenDto){
