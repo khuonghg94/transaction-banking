@@ -6,9 +6,9 @@
 ![diagram](https://user-images.githubusercontent.com/54698417/142372447-08ca75fd-14bf-4661-929d-eb8286124b42.png)
 
 ## **3. Tổ chức source**
-- Thư mục auth: chứa source code API dùng để đăng ký người dùng muốn truy cập hệ thống, lấy token chứng thực và xác thực thông tin của người dùng muốn sử dụng hệ thống.
-- Thư mục receive-data: chứa source code API nhận dữ liệu từ phía client gửi lên. Sau đó gửi message vào hàng đợi của RabbitMQ Server.
-- Thư mục import-transaction: chứa source code nhận và xử lý message trong hàng đợi của RabbitMQ. Sau đó insert vào cơ sở dữ liệu.
+- Thư mục ```auth```: chứa source code API dùng để đăng ký người dùng muốn truy cập hệ thống, lấy token chứng thực và xác thực thông tin của người dùng muốn sử dụng hệ thống.
+- Thư mục ```receive-data```: chứa source code API nhận dữ liệu từ phía client gửi lên. Sau đó gửi message vào hàng đợi của RabbitMQ Server.
+- Thư mục ```import-transaction```: chứa source code nhận và xử lý message trong hàng đợi của RabbitMQ. Sau đó insert vào cơ sở dữ liệu.
 
 ## **4. Hướng dẫn sử dụng**
 
