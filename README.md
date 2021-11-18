@@ -69,7 +69,7 @@ Sau khi đã get token thành công, người dùng có thể sử dụng token 
 **Lệnh call API import-transaction như sau:**
 
 ```
-curl --location --request POST 'http://localhost:3000/data-import/upload' --header 'Authorization: Bearer {{token}}' --form 'file=@"{{path_of_file}}"'
+curl --location --request POST "http://localhost:3000/data-import/upload" --header "Authorization: Bearer {{token}}" --form "file=@\"{{path_of_file}}\""
 ```
 
 Chú thích:
